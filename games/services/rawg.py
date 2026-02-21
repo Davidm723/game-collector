@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 from django.conf import settings
 from games.models import Console, Genre, Game
 
