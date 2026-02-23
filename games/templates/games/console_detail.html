@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ console.name }}</h1>
+
+{% if console.image %}
+<img src="{{ console.img }}" alt="{{ console.name }}" style="max-width:300px;">
+{% endif %}
+
+<h2>Games</h2>
+
+<ul class="game-list">
+    {% for game in games %}
+    <li>
+        <a href="{% url 'game-detail' game.id %}">{{ game.title }}</a>
+    </li>
+    {% empty %}
+    <p>No games for this console yet!</p>
+    {% endfor %}
+</ul>
+{% endblock %}

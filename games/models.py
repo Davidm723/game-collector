@@ -6,6 +6,7 @@ class Console(models.Model):
     name = models.CharField(max_length=100, unique=True)
     manufacturer = models.CharField(max_length=100, blank=True)
     release_year = models.PositiveIntegerField(blank=True, null=True)
+    image = models.URLField(blank=True)
 
     def __str__(self):
         return self.name

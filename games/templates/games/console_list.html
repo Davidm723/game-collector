@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Consoles</h1>
+
+<div class="console-grid">
+  {% for console in consoles %}
+    <a href="{% url 'console-detail' console.id %}" class="console-card">
+      {% if console.image %}
+        <img src="{{ console.image }}" alt="{{ console.name }}">
+      {% endif %}
+      <h3>{{ console.name }}</h3>
+      <p>{{ console.release_year }}</p>
+    </a>
+  {% empty %}
+    <p>No consoles found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ game.title }}</h1>
+
+{% if game.image %}
+<img src="{{ game.image }}" alt="{{ game.title }}" style="max-width:300px;">
+{% endif %}
+
+<p><strong>Console: </strong> {{ game.console.name }}</p>
+<p><strong>Released: </strong> {{ game.released }}</p>
+
+<p><strong>Genres: </strong>
+    {% for genre in game.genres.all %}
+    {{ genre.name }}{%if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
