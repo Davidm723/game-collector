@@ -3,9 +3,7 @@
 {% block content %}
 <h1>{{ console.name }}</h1>
 
-{% if console.image %}
-<img src="{{ console.img }}" alt="{{ console.name }}" style="max-width:300px;">
-{% endif %}
+<img src="{{ console.display_image }}" alt="{{ console.name }}" style="max-width:300px;">
 
 <h2>Games</h2>
 

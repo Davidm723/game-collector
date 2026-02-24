@@ -10,8 +10,18 @@
 <p><strong>Console: </strong> {{ game.console.name }}</p>
 <p><strong>Released: </strong> {{ game.released }}</p>
 
-<p><strong>Genres: </strong>
+<h3>Genres</h3>
+{% if game.genres.all %}
+<ul class="genre-list">
     {% for genre in game.genres.all %}
-    {{ genre.name }}{%if not forloop.last %}, {% endif %}
+    <li>
+        <a href="{% url 'genre-detail' genre.id %}">
+            {{ genre.name }}
+        </a>
+    </li>
     {% endfor %}
-</p>
+</ul>
+{% else %}
+<p>No genres assigned.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ genre.name }}</h1>
+
+{% if genre.games.all %}
+<ul>
+    {% for game in genre.games.all %}
+    <li>
+        <a href="{% url 'game-detail' game.id %}">
+            {{ game.title }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No games found for this genre.</p>
+{% endif %}
+{% endblock %}

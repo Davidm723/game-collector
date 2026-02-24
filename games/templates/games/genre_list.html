@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Genres</h1>
+
+<ul>
+    {% for genre in object_list %}
+    <li>
+        <a href="{% url 'genre-detail' genre.id %}">
+            {{ genre.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

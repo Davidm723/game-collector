@@ -7,14 +7,18 @@
     <meta charset="UTF-8">
     <title>Game Collector</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block head %} {% endblock %}
 </head>
 
 <body>
 
     <nav>
         <ul>
+            <li><a href="{% url 'home' %}"><img src="https://cdn-icons-png.freepik.com/512/9335/9335791.png"
+                        alt="A game controller" style="height:25px;" /></a></li>
             <li><a href="{% url 'console-list' %}">Consoles</a></li>
             <li><a href="{% url 'game-search' %}">Add Games</a></li>
+            <li><a href="{% url 'genre-list' %}">Genres</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
         </ul>
     </nav>

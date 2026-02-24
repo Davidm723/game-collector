@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/games/console_list.css' %}" />
+{% endblock %}
 {% block content %}
 <h1>Consoles</h1>
 
 <div class="console-grid">
   {% for console in consoles %}
-    <a href="{% url 'console-detail' console.id %}" class="console-card">
-      {% if console.image %}
-        <img src="{{ console.image }}" alt="{{ console.name }}">
-      {% endif %}
+  <a href="{% url 'console-detail' console.id %}" class="console-card">
+    <img src="{{ console.display_image }}" alt="{{ console.name }}">
+    <div class="console-info">
       <h3>{{ console.name }}</h3>
-      <p>{{ console.release_year }}</p>
-    </a>
+      <p>Released {{ console.release_year }}</p>
+    </div>
+  </a>
   {% empty %}
-    <p>No consoles found.</p>
+  <p>No consoles found.</p>
   {% endfor %}
 </div>
 {% endblock %}

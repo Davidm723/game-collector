@@ -5,14 +5,20 @@ from .views import (
     GameDetailView,
     GameSearchView,
     GameImportView,
+    GenreListView,
+    GenreDetailView,
     about,
+    home,
 )
 
 urlpatterns = [
-    path("", ConsoleListView.as_view(), name="console-list"),
+    path("", home, name="home"),
+    path("console/", ConsoleListView.as_view(), name="console-list"),
     path("console/<int:pk>/", ConsoleDetailView.as_view(), name="console-detail"),
     path("game/<int:pk>/", GameDetailView.as_view(), name="game-detail"),
     path("add-games/", GameSearchView.as_view(), name="game-search"),
     path("import-games/", GameImportView.as_view(), name="game-import"),
+    path("genres/", GenreListView.as_view(), name="genre-list"),
+    path("genres/<int:pk>/", GenreDetailView.as_view(), name="genre-detail"),
     path("about/", about, name="about"),
 ]
