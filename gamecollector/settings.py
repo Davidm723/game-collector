@@ -80,8 +80,8 @@ WSGI_APPLICATION = "gamecollector.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ['DATABASE_URL'],
+    "default": dj_database_url.config(
+        default=os.environ["DATABASE_URL"],
         conn_max_age=600,
         ssl_require=True,
     )
@@ -123,3 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+LOGIN_REDIRECT_URL = "console-list"
+
+LOGOUT_REDIRECT_URL = 'home'

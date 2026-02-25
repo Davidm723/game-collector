@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/games/game_detail.css' %}" />
+{% endblock %}
 {% block content %}
 <h1>{{ game.title }}</h1>
-
+<section class="action-buttons">
+    <button><a href="{% url 'game-update' game.id %}" class="btn btn-edit">Edit Game</a></button>
+    <button><a href="{% url 'game-delete' game.id %}" class="btn btn-delete">Delete Game</a></button>
+</section>
+<br />
 {% if game.image %}
 <img src="{{ game.image }}" alt="{{ game.title }}" style="max-width:300px;">
 {% endif %}

@@ -60,24 +60,48 @@ h3 {
 }
 
 p {
-  color: #b0b0b0;
+  color: #000000;
 }
 
-button,
-.btn {
-  background-color: #4dabf7;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
+button:not(.btn) {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background-color: #4dabf7;
+  color: #fff;
+  border-color: #4dabf7;
+}
+
+button:not(.btn):hover {
+  background-color: #339af0;
+  border-color: #339af0;
+}
+
+#logout-form {
+  display: inline;
+}
+
+#logout-form button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 500;
+  color: #e4e4e4;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
-button:hover,
-.btn:hover {
-  background-color: #339af0;
+#logout-form button:hover {
+  color: #4dabf7;
 }
 
 @media (max-width: 768px) {

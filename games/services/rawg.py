@@ -49,11 +49,12 @@ def import_genres():
         Genre.objects.get_or_create(name=item["name"])
 
 
-def import_game(rawg_id, console):
+def import_game(rawg_id, console, user):
     data = rawg_get(f"games/{rawg_id}")
 
     game, created = Game.objects.get_or_create(
         rawg_id=data["id"],
+        user=user,
         defaults={
             "title": data["name"],
             "console": console,

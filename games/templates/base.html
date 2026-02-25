@@ -16,10 +16,22 @@
         <ul>
             <li><a href="{% url 'home' %}"><img src="https://cdn-icons-png.freepik.com/512/9335/9335791.png"
                         alt="A game controller" style="height:25px;" /></a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'console-list' %}">Consoles</a></li>
             <li><a href="{% url 'game-search' %}">Add Games</a></li>
             <li><a href="{% url 'genre-list' %}">Genres</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
+            <li>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Log out</button>
+                </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
         </ul>
     </nav>
 

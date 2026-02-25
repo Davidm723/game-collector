@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 {% block content %}
-<section class="logo-container">
-    <div class="controller-container">
-        <img src="https://cdn-icons-png.freepik.com/512/9335/9335791.png" alt="A game controller"
-            style="height: 50vh;" />
-    </div>
-    <h1>The Game Collector</h1>
-</section>
+<div class="home-wrapper">
+
+    <section class="logo-container">
+        <div class="controller-container">
+            <img src="https://cdn-icons-png.freepik.com/512/9335/9335791.png" alt="A game controller" />
+        </div>
+        <h1>The Game Collector</h1>
+    </section>
+    {% if not user.is_authenticated %}
+    <section class="login-section">
+        <form action="{% url 'home' %}" method="post" class="login">
+            <h1>Login</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="btn submit">Login</button>
+        </form>
+    </section>
+    {% endif %}
+</div>
 {% endblock %}

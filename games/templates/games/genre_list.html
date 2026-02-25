@@ -3,13 +3,15 @@
 {% block content %}
 <h1>Genres</h1>
 
-<ul>
-    {% for genre in object_list %}
+{% if genres %}
+<ul class="genre-list">
+    {% for genre in genres %}
     <li>
-        <a href="{% url 'genre-detail' genre.id %}">
-            {{ genre.name }}
-        </a>
+        <a href="{% url 'genre-detail' genre.id %}">{{ genre.name }}</a>
     </li>
     {% endfor %}
 </ul>
+{% else %}
+<p>You don't have any games in any genres yet.</p>
+{% endif %}
 {% endblock %}
