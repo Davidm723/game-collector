@@ -1,48 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/games/game_search.css' %}" />
+{% endblock %}
 {% block content %}
 
-<h1>Search Games</h1>
+<section class="search-page">
 
-<!-- Search Form -->
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Search</button>
-</form>
+    <h1 class="page-title">Search Games</h1>
 
-{% if games %}
-<h2>Results</h2>
+    <form method="POST" class="search-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary">Search</button>
+    </form>
 
-<form method="POST" action="{% url 'game-import' %}">
-    {% csrf_token %}
+    {% if games %}
+    <h2 class="results-title">Results</h2>
 
-    {% for game in games %}
-    <div class="game-result"
-        style="border:1px solid #ccc; padding:10px; margin:10px 0; display:flex; align-items:center;">
-        {% if game.image %}
-        <img src="{{ game.image }}" alt="{{ game.name }}" width="120" style="margin-right:15px;">
-        {% endif %}
+    <form method="POST" action="{% url 'game-import' %}">
+        {% csrf_token %}
 
-        <div class="game-info">
-            <p><strong>{{ game.name }}</strong></p>
+        <div class="results-grid">
+            {% for game in games %}
+            <div class="game-card">
 
-            <label for="platform_{{ game.id }}">Select Platform:</label>
-            <select name="console_name" id="platform_{{ game.id }}">
-                {% for platform in game.platforms %}
-                <option value="{{ platform }}">{{ platform }}</option>
-                {% endfor %}
-            </select>
+                {% if game.image %}
+                <div class="game-image">
+                    <img src="{{ game.image }}" alt="{{ game.name }}">
+                </div>
+                {% endif %}
 
-            <div>
-                <input type="checkbox" name="game_ids" value="{{ game.id }}">
-                Import this game
+                <div class="game-content">
+                    <h3>{{ game.name }}</h3>
+
+                    <div class="platform-select">
+                        <label for="platform_{{ game.id }}">Platform</label>
+                        <select name="console_name_{{ game.id }}" id="platform_{{ game.id }}">
+                            {% for platform in game.platforms %}
+                            <option value="{{ platform }}">{{ platform }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="import-option">
+                        <input type="checkbox" name="game_ids" value="{{ game.id }}">
+                        <span>Add to Collection</span>
+                    </div>
+                </div>
+
             </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
 
-    <button type="submit">Import Selected Games</button>
-</form>
-{% endif %}
+        <button type="submit" class="btn-primary import-btn">
+            Import Selected Games
+        </button>
+
+    </form>
+    {% endif %}
+
+</section>
 
 {% endblock %}

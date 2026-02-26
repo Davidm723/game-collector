@@ -24,12 +24,21 @@ class Genre(models.Model):
 class Game(models.Model):
     console = models.ForeignKey(Console, on_delete=models.CASCADE, related_name="games")
     genres = models.ManyToManyField(Genre, related_name="games", blank=True)
-    rawg_id = models.IntegerField(unique=True)
+    rawg_id = models.IntegerField()
     title = models.CharField(max_length=200)
     released = models.DateField(null=True, blank=True)
     image = models.URLField(blank=True, null=True)
     notes = models.TextField(blank=True)
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["rawg_id", "console", "user"],
+                name="unique_game_per_console_per_user",
+            )
+        ]
 
     def __str__(self):
         return self.title

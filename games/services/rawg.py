@@ -54,10 +54,10 @@ def import_game(rawg_id, console, user):
 
     game, created = Game.objects.get_or_create(
         rawg_id=data["id"],
+        console=console,  # ✅ MUST be here
         user=user,
         defaults={
             "title": data["name"],
-            "console": console,
             "released": (
                 datetime.strptime(data["released"], "%Y-%m-%d").date()
                 if data.get("released")

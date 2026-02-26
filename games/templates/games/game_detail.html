@@ -1,34 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/games/game_detail.css' %}" />
 {% endblock %}
+
 {% block content %}
-<h1>{{ game.title }}</h1>
-<section class="action-buttons">
-    <button><a href="{% url 'game-update' game.id %}" class="btn btn-edit">Edit Game</a></button>
-    <button><a href="{% url 'game-delete' game.id %}" class="btn btn-delete">Delete Game</a></button>
+
+<section class="game-detail-page">
+
+    <div class="game-card-detail">
+
+        <div class="game-header">
+            <h1>{{ game.title }}</h1>
+
+            <div class="action-buttons">
+                <a href="{% url 'game-update' game.id %}" class="btn btn-edit">Edit</a>
+                <a href="{% url 'game-delete' game.id %}" class="btn btn-delete">Delete</a>
+            </div>
+        </div>
+
+        {% if game.image %}
+        <div class="game-image">
+            <img src="{{ game.image }}" alt="{{ game.title }}">
+        </div>
+        {% endif %}
+
+        <div class="game-info">
+            <p><strong>Console:</strong> {{ game.console.name }}</p>
+            {% if game.released %}
+            <p><strong>Released:</strong> {{ game.released }}</p>
+            {% endif %}
+
+            <h3>Genres</h3>
+            {% if game.genres.all %}
+            <div class="genre-list">
+                {% for genre in game.genres.all %}
+                <a href="{% url 'genre-detail' genre.id %}" class="genre-badge">
+                    {{ genre.name }}
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No genres assigned.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
 </section>
-<br />
-{% if game.image %}
-<img src="{{ game.image }}" alt="{{ game.title }}" style="max-width:300px;">
-{% endif %}
 
-<p><strong>Console: </strong> {{ game.console.name }}</p>
-<p><strong>Released: </strong> {{ game.released }}</p>
-
-<h3>Genres</h3>
-{% if game.genres.all %}
-<ul class="genre-list">
-    {% for genre in game.genres.all %}
-    <li>
-        <a href="{% url 'genre-detail' genre.id %}">
-            {{ genre.name }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No genres assigned.</p>
-{% endif %}
 {% endblock %}

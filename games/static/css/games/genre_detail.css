@@ -1,0 +1,55 @@
+.genre-page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  background: white;
+  border: 2px solid black;
+  text-decoration: none;
+  color: black;
+  transition: 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+}
+
+.game-image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 2px solid black;
+}
+
+.game-card-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.game-card h3 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.game-card p {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.empty-message {
+  font-style: italic;
+  color: #666;
+}

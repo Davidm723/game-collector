@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/games/genres.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Genres</h1>
 
-{% if genres %}
-<ul class="genre-list">
-    {% for genre in genres %}
-    <li>
-        <a href="{% url 'genre-detail' genre.id %}">{{ genre.name }}</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>You don't have any games in any genres yet.</p>
-{% endif %}
+<section class="genres-page">
+    <h1 class="page-title">Genres</h1>
+
+    {% if genres %}
+    <div class="genres-grid">
+        {% for genre in genres %}
+        <a href="{% url 'genre-detail' genre.id %}" class="genre-card">
+            {{ genre.name }}
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-message">You don't have any games in any genres yet.</p>
+    {% endif %}
+
+</section>
+
 {% endblock %}

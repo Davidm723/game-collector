@@ -167,7 +167,7 @@ class GameDelete(LoginRequiredMixin, DeleteView):
         return Game.objects.filter(user=self.request.user)
 
 
-class GameSearchView(View):
+class GameSearchView(LoginRequiredMixin, View):
     template_name = "games/game_search.html"
 
     def get(self, request):
@@ -209,11 +209,20 @@ class GameImportView(LoginRequiredMixin, View):
 
     def post(self, request):
         game_ids = request.POST.getlist("game_ids")
-        console_names = request.POST.getlist("console_name")
 
-        for rawg_id, console_name in zip(game_ids, console_names):
+        for rawg_id in game_ids:
+            console_name = request.POST.get(f"console_name_{rawg_id}")
+
+            if not console_name:
+                continue
+
             console, _ = Console.objects.get_or_create(name=console_name)
-            import_game(rawg_id=rawg_id, console=console, user=request.user)
+
+            import_game(
+                rawg_id=rawg_id,
+                console=console,
+                user=request.user
+            )
 
         return redirect("console-list")
 

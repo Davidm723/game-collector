@@ -1,19 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/games/console_detail.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>{{ console.name }}</h1>
 
-<img src="{{ console.display_image }}" alt="{{ console.name }}" style="max-width:300px;">
+<section class="console-page">
 
-<h2>Games</h2>
+  <div class="console-header">
+    <div class="console-info">
+      <h1>{{ console.name }}</h1>
+    </div>
 
-<ul class="game-list">
+    {% if console.display_image %}
+      <div class="console-image">
+        <img src="{{ console.display_image }}" alt="{{ console.name }}">
+      </div>
+    {% endif %}
+  </div>
+
+  <h2 class="games-title">Games</h2>
+
+  {% if games %}
+  <div class="games-grid">
     {% for game in games %}
-    <li>
-        <a href="{% url 'game-detail' game.id %}">{{ game.title }}</a>
-    </li>
-    {% empty %}
-    <p>No games for this console yet!</p>
+      <a href="{% url 'game-detail' game.id %}" class="game-card">
+        {% if game.image %}
+          <img src="{{ game.image }}" alt="{{ game.title }}">
+        {% endif %}
+        <div class="game-card-content">
+          <h3>{{ game.title }}</h3>
+        </div>
+      </a>
     {% endfor %}
-</ul>
+  </div>
+  {% else %}
+    <p class="empty-message">No games for this console yet!</p>
+  {% endif %}
+
+</section>
+
 {% endblock %}
