@@ -9,6 +9,8 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
 requests = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
