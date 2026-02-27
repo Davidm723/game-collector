@@ -22,7 +22,8 @@ if os.path.exists(BASE_DIR / ".env"):
     from dotenv import load_dotenv
 
     load_dotenv()
-    RAWG_API_KEY = os.getenv("RAWG_API_KEY")
+    
+RAWG_API_KEY = os.getenv("RAWG_API_KEY")
 
 
 # Quick-start development settings - unsuitable for production
